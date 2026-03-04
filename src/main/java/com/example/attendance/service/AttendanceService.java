@@ -1,145 +1,78 @@
 package com.example.attendance.service;
 
-import com.example.attendance.model.*;
+import com.example.attendance.entity.AttendanceEvent;
+import com.example.attendance.model.AttendanceStatus;
 import com.example.attendance.repository.AttendanceEventRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
 public class AttendanceService {
 
-    private final AttendanceEventRepository repository;
+ private final AttendanceEventRepository repository;
 
-    public AttendanceService(AttendanceEventRepository repository) {
-        this.repository = repository;
-    }
+ public AttendanceService(AttendanceEventRepository repository) {
+  this.repository = repository;
+ }
 
-    public DailyAttendanceResult calculateDailyAttendance(
-            String employeeId,
-            LocalDate date
-    ) {
+ public AttendanceResult processDay(String employeeId, LocalDate date) {
 
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(23, 59, 59);
+  LocalDateTime start = date.atStartOfDay();
+  LocalDateTime end = date.atTime(23, 59, 59);
 
-        List<AttendanceEvent> events =
-                repository.findByEmployeeAndDateRange(
-                        employeeId,
-                        startOfDay,
-                        endOfDay
-                );
+  List<AttendanceEvent> events =
+          repository.findByEmployeeIdAndEventTimeBetween(employeeId, start, end);
 
-        if (events.isEmpty()) {
-            return new DailyAttendanceResult(
-                    employeeId,
-                    date,
-                    new ArrayList<>(),
-                    Duration.ZERO,
-                    AttendanceStatus.ABSENT
-            );
-        }
+  events.sort(Comparator.comparing(AttendanceEvent::getEventTime));
 
-        List<Session> sessions = new ArrayList<>();
-        Duration totalWorked = Duration.ZERO;
+  long totalMinutes = 0;
+  LocalDateTime lastIn = null;
 
-        LocalDateTime lastIn = null;
-        boolean invalid = false;
+  for (AttendanceEvent e : events) {
 
-        for (AttendanceEvent event : events) {
+   if ("IN".equalsIgnoreCase(e.getEventType())) {
 
-            if (event.getEventType() == EventType.IN) {
+    if (lastIn != null)
+     return AttendanceResult.invalid("Double IN detected");
 
-                if (lastIn != null) {
-                    // Double IN without OUT
-                    invalid = true;
-                    break;
-                }
+    lastIn = e.getEventTime();
+   }
 
-                lastIn = event.getEventTime();
-            }
+   else if ("OUT".equalsIgnoreCase(e.getEventType())) {
 
-            else if (event.getEventType() == EventType.OUT) {
+    if (lastIn == null)
+     return AttendanceResult.invalid("OUT before IN detected");
 
-                if (lastIn == null) {
-                    // OUT before IN
-                    invalid = true;
-                    break;
-                }
+    totalMinutes += Duration.between(lastIn, e.getEventTime()).toMinutes();
+    lastIn = null;
+   }
+  }
 
-                LocalDateTime outTime = event.getEventTime();
+  // ===== STILL INSIDE OFFICE =====
+  if (lastIn != null) {
 
-                if (outTime.isBefore(lastIn)) {
-                    invalid = true;
-                    break;
-                }
+   // If processing past date → INCOMPLETE
+   if (LocalDate.now().isAfter(date)) {
+    return AttendanceResult.incomplete(totalMinutes);
+   }
 
-                sessions.add(new Session(lastIn, outTime));
-                totalWorked = totalWorked.plus(Duration.between(lastIn, outTime));
-                lastIn = null;
-            }
-        }
+   // LIVE calculation every time
+   long runningMinutes =
+           totalMinutes + Duration.between(lastIn, LocalDateTime.now()).toMinutes();
 
-        if (invalid) {
-            return new DailyAttendanceResult(
-                    employeeId,
-                    date,
-                    new ArrayList<>(),
-                    Duration.ZERO,
-                    AttendanceStatus.INVALID
-            );
-        }
+   return AttendanceResult.inOffice(runningMinutes);
+  }
 
-        LocalDateTime now = LocalDateTime.now();
+  // ===== COMPLETED DAY =====
+  if (totalMinutes >= 240)
+   return AttendanceResult.completed(totalMinutes, AttendanceStatus.PRESENT);
 
-        // Case: Still inside office
-        if (lastIn != null) {
+  if (totalMinutes > 0)
+   return AttendanceResult.completed(totalMinutes, AttendanceStatus.PARTIAL);
 
-            if (date.equals(LocalDate.now())) {
-
-                Duration liveDuration = Duration.between(lastIn, now);
-                totalWorked = totalWorked.plus(liveDuration);
-
-                sessions.add(new Session(lastIn, now));
-
-                return new DailyAttendanceResult(
-                        employeeId,
-                        date,
-                        sessions,
-                        totalWorked,
-                        AttendanceStatus.IN_OFFICE_NOW
-                );
-            }
-            else {
-                // Day is over, but no OUT event
-                return new DailyAttendanceResult(
-                        employeeId,
-                        date,
-                        new ArrayList<>(),
-                        Duration.ZERO,
-                        AttendanceStatus.INCOMPLETE
-                );
-            }
-        }
-
-        long hoursWorked = totalWorked.toHours();
-
-        AttendanceStatus finalStatus;
-
-        if (hoursWorked < 4) {
-            finalStatus = AttendanceStatus.PARTIAL;
-        } else {
-            finalStatus = AttendanceStatus.PRESENT;
-        }
-
-        return new DailyAttendanceResult(
-                employeeId,
-                date,
-                sessions,
-                totalWorked,
-                finalStatus
-        );
-    }
+  return AttendanceResult.completed(0, AttendanceStatus.PARTIAL);
+ }
 }
