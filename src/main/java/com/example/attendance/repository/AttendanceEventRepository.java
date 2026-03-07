@@ -1,4 +1,3 @@
-
 package com.example.attendance.repository;
 
 import com.example.attendance.entity.AttendanceEvent;
@@ -7,10 +6,13 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 public interface AttendanceEventRepository
- extends JpaRepository<AttendanceEvent,Long>{
+        extends JpaRepository<AttendanceEvent, Long> {
 
- List<AttendanceEvent> findByProcessedFalse();
+    List<AttendanceEvent> findByProcessedFalse();
 
- List<AttendanceEvent> findByEmployeeIdAndEventTimeBetween(
-  String employeeId, LocalDateTime start, LocalDateTime end);
+    List<AttendanceEvent> findByEmployeeIdAndEventTimeBetween(
+            String employeeId, LocalDateTime start, LocalDateTime end);
+
+    List<AttendanceEvent> findByEmployeeIdAndEventTimeBetweenOrderByEventTimeAsc(
+            String employeeId, LocalDateTime start, LocalDateTime end);
 }

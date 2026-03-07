@@ -59,11 +59,8 @@ public class AttendanceService {
     return AttendanceResult.incomplete(totalMinutes);
    }
 
-   // LIVE calculation every time
-   long runningMinutes =
-           totalMinutes + Duration.between(lastIn, LocalDateTime.now()).toMinutes();
-
-   return AttendanceResult.inOffice(runningMinutes);
+   // Employee still in office
+   return AttendanceResult.inOffice(0);
   }
 
   // ===== COMPLETED DAY =====

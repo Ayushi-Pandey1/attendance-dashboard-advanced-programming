@@ -6,7 +6,6 @@ public class AttendanceResult {
 
     private AttendanceStatus status;
     private String finalDuration;
-    private String currentDuration;
     private String invalidReason;
 
     private AttendanceResult() {}
@@ -21,7 +20,6 @@ public class AttendanceResult {
     public static AttendanceResult inOffice(long minutes) {
         AttendanceResult r = new AttendanceResult();
         r.status = AttendanceStatus.IN_OFFICE;
-        r.currentDuration = format(minutes);
         return r;
     }
 
@@ -48,6 +46,5 @@ public class AttendanceResult {
 
     public AttendanceStatus getStatus() { return status; }
     public String getFinalDuration() { return finalDuration; }
-    public String getCurrentDuration() { return currentDuration; }
     public String getInvalidReason() { return invalidReason; }
 }

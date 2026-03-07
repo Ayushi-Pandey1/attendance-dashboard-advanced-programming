@@ -2,6 +2,7 @@ package com.example.attendance.service;
 
 import com.example.attendance.entity.AttendanceEvent;
 import com.example.attendance.entity.DailyAttendanceEntity;
+import com.example.attendance.model.AttendanceStatus;
 import com.example.attendance.repository.AttendanceEventRepository;
 import com.example.attendance.repository.DailyAttendanceRepository;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,6 +26,9 @@ public class AttendanceProcessor {
   this.service = service;
  }
 
+ /**
+  * Polls new tap events
+  */
  @Scheduled(fixedRate = 10000)
  public void pollAndProcess() {
 
@@ -42,14 +46,42 @@ public class AttendanceProcessor {
                    .orElse(new DailyAttendanceEntity(emp, date));
 
    entity.setStatus(result.getStatus());
-   entity.setFinalInOfficeDuration(result.getFinalDuration());
-   entity.setCurrentInOfficeDuration(result.getCurrentDuration());
+
+   if (result.getStatus() == AttendanceStatus.IN_OFFICE) {
+    entity.setFinalInOfficeDuration("ONGOING");
+   } else {
+    entity.setFinalInOfficeDuration(result.getFinalDuration());
+   }
+
    entity.setInvalidReason(result.getInvalidReason());
 
    dailyRepo.save(entity);
 
    e.setProcessed(true);
    eventRepo.save(e);
+  }
+ }
+
+ /**
+  * Midnight job to mark forgotten tap-outs
+  */
+ @Scheduled(cron = "0 5 0 * * *")
+ public void markIncompleteSessions() {
+
+  LocalDate yesterday = LocalDate.now().minusDays(1);
+
+  List<DailyAttendanceEntity> openSessions =
+          dailyRepo.findByAttendanceDateAndStatus(
+                  yesterday,
+                  AttendanceStatus.IN_OFFICE
+          );
+
+  for (DailyAttendanceEntity entity : openSessions) {
+
+   entity.setStatus(AttendanceStatus.INCOMPLETE);
+   entity.setInvalidReason("Forgot to tap out");
+
+   dailyRepo.save(entity);
   }
  }
 }

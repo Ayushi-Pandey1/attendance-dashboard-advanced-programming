@@ -23,8 +23,6 @@ public class DailyAttendanceEntity {
  @Column(name = "final_in_office_duration")
  private String finalInOfficeDuration;
 
- @Column(name = "current_in_office_duration")
- private String currentInOfficeDuration;
 
  @Enumerated(EnumType.STRING)
  private AttendanceStatus status;
@@ -58,12 +56,6 @@ public class DailyAttendanceEntity {
 
  public void setFinalInOfficeDuration(String finalInOfficeDuration) {
   this.finalInOfficeDuration = finalInOfficeDuration;
- }
-
- public String getCurrentInOfficeDuration() { return currentInOfficeDuration; }
-
- public void setCurrentInOfficeDuration(String currentInOfficeDuration) {
-  this.currentInOfficeDuration = currentInOfficeDuration;
  }
 
  public AttendanceStatus getStatus() { return status; }
