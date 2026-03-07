@@ -46,6 +46,7 @@ public class AttendanceProcessor {
                    .orElse(new DailyAttendanceEntity(emp, date));
 
    entity.setStatus(result.getStatus());
+   entity.setEventTime(e.getEventTime()); // <-- NEW LINE
 
    if (result.getStatus() == AttendanceStatus.IN_OFFICE) {
     entity.setFinalInOfficeDuration("ONGOING");

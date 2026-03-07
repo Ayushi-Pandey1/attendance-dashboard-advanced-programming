@@ -5,6 +5,7 @@ public class DailyAttendanceDto {
     private String status;
     private String finalInOfficeDuration;
     private String invalidReason;
+    private String eventTime; // <-- NEW FIELD
 
     public DailyAttendanceDto() {}
 
@@ -19,4 +20,7 @@ public class DailyAttendanceDto {
 
     public String getInvalidReason() { return invalidReason; }
     public void setInvalidReason(String invalidReason) { this.invalidReason = invalidReason; }
+
+    public String getEventTime() { return eventTime; }         // <-- NEW
+    public void setEventTime(String eventTime) { this.eventTime = eventTime; } // <-- NEW
 }

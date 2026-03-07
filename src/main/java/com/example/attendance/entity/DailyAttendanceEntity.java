@@ -4,6 +4,7 @@ import com.example.attendance.model.AttendanceStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "daily_attendance",
@@ -23,6 +24,8 @@ public class DailyAttendanceEntity {
  @Column(name = "final_in_office_duration")
  private String finalInOfficeDuration;
 
+ @Column(name = "event_time")
+ private LocalDateTime eventTime;
 
  @Enumerated(EnumType.STRING)
  private AttendanceStatus status;
@@ -56,6 +59,12 @@ public class DailyAttendanceEntity {
 
  public void setFinalInOfficeDuration(String finalInOfficeDuration) {
   this.finalInOfficeDuration = finalInOfficeDuration;
+ }
+
+ public LocalDateTime getEventTime() { return eventTime; }
+
+ public void setEventTime(LocalDateTime eventTime) {
+  this.eventTime = eventTime;
  }
 
  public AttendanceStatus getStatus() { return status; }
