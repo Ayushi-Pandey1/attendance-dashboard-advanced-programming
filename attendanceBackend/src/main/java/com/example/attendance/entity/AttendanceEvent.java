@@ -1,4 +1,3 @@
-
 package com.example.attendance.entity;
 
 import jakarta.persistence.*;
@@ -22,12 +21,16 @@ public class AttendanceEvent {
  private String eventType;
 
  @Column(nullable=false)
- private boolean processed=false;
+ private boolean processed = false;
 
- public Long getId(){return id;}
- public String getEmployeeId(){return employeeId;}
- public LocalDateTime getEventTime(){return eventTime;}
- public String getEventType(){return eventType;}
- public boolean isProcessed(){return processed;}
- public void setProcessed(boolean processed){this.processed=processed;}
+ public Long getId() { return id; }
+ public String getEmployeeId() { return employeeId; }
+ public LocalDateTime getEventTime() { return eventTime; }
+ public String getEventType() { return eventType; }
+ public boolean isProcessed() { return processed; }
+
+ public void setEmployeeId(String employeeId) { this.employeeId = employeeId; }
+ public void setEventTime(LocalDateTime eventTime) { this.eventTime = eventTime; }
+ public void setEventType(String eventType) { this.eventType = eventType; }
+ public void setProcessed(boolean processed) { this.processed = processed; }
 }
