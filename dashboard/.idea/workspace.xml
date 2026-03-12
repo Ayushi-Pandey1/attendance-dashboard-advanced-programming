@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="235744ec-9048-406a-a69e-ac651518fded" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/dto/LoginRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/dto/TapRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/entity/StaffCredential.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/repository/StaffCredentialRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dashboard.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/_metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/chunk-IR323MWG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/chunk-IR323MWG.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/chunk-MEA6YV6E.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/chunk-MEA6YV6E.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-dom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-dom.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-dom_client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-dom_client.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-router-dom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react-router-dom.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react_jsx-dev-runtime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react_jsx-dev-runtime.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react_jsx-runtime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/react_jsx-runtime.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/recharts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.vite/deps/recharts.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/dist/index.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/cookie/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/dist/index.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/dist/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/dist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/dist/index.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router-dom/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/browser-DzsJABDQ.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/browser-sPQ7eaK4.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/chunk-2YMDXNOJ.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/chunk-JPUPSTYD.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/chunk-KSEWV2VO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/chunk-XOLAXE2Z.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/dom-export.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/dom-export.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/dom-export.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/dom-export.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client-C4tCIird.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client-EzWJGpN_.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server-client.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index-react-server.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/index.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/instrumentation--6Pioq_G.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/lib/types/internal.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/lib/types/internal.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/lib/types/internal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/lib/types/internal.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/register-CBoanF80.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/register-cRYJ3CjG.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/development/router-cLsU7kHk.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/browser-DzsJABDQ.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/browser-sPQ7eaK4.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/chunk-772H4TVR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/chunk-B5UMK6O7.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/chunk-RJCJ3EYF.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/chunk-TXB4YXR2.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/chunk-ZJMCM6KT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/dom-export.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/dom-export.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/dom-export.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/dom-export.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client-C4tCIird.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client-EzWJGpN_.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server-client.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index-react-server.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/index.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/instrumentation--6Pioq_G.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/lib/types/internal.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/lib/types/internal.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/lib/types/internal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/lib/types/internal.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/register-CBoanF80.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/register-cRYJ3CjG.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/dist/production/router-cLsU7kHk.d.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/react-router/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/set-cookie-parser/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/set-cookie-parser/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/set-cookie-parser/lib/set-cookie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/set-cookie-parser/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/LoginPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ManagerView.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TapScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../attendanceBackend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../attendanceBackend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/controller/AttendanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/controller/AttendanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/entity/AttendanceEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../attendanceBackend/src/main/java/com/example/attendance/entity/AttendanceEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Charts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Charts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/ayush/ADVPA1/attendance-dashboard-advanced-programming/dashboard" value="3AjbZsj4El607GdEXwQMObmL7Fu" />
+    </persistenceIdMap>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3AjbZsj4El607GdEXwQMObmL7Fu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ayush/ADVPA1/attendance-dashboard-advanced-programming"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="235744ec-9048-406a-a69e-ac651518fded" name="Changes" comment="" />
+      <created>1773108985729</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773108985729</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
