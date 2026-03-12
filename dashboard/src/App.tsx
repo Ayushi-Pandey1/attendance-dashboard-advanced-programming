@@ -1,24 +1,42 @@
 import { useState } from 'react';
+import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import { useAttendanceData } from './hooks/useAttendanceData';
 import { StatusBadge } from './components/StatusBadge';
 import { LiveTimerCard } from './components/LiveTimerCard';
 import { AttendanceTable } from './components/AttendanceTable';
 import { Charts } from './components/Charts';
 import { StatsRow } from './components/StatsRow';
+import LoginPage from './components/LoginPage';
+import ManagerView from './components/ManagerView';
+import TapScreen from './components/TapScreen';
 import type { AttendanceStatus } from './types';
 
-const EMPLOYEE_ID = 'EMP001';
-const EMPLOYEE_NAME = 'Alex Morgan';
-const EMPLOYEE_ROLE = 'Senior Engineer';
-
 export default function App() {
-  const { todayStatus, history, monthData, loading, error, refresh } = useAttendanceData(EMPLOYEE_ID);
-  const [tab, setTab] = useState<'overview' | 'history'>('overview');
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/dashboard/:employeeId" element={<Dashboard />} />
+      <Route path="/manager/:managerId" element={<ManagerView />} />
+      <Route path="/tap" element={<TapScreen />} />
+    </Routes>
+  );
+}
+
+function Dashboard() {
+  const { employeeId } = useParams<{ employeeId: string }>();
+  const navigate = useNavigate();
+  const id = employeeId ?? 'EMP001';
+
+  const { todayStatus, history, monthData, loading, error, refresh } = useAttendanceData(id);
+  const [tab, setTab] = useState<'overview'>('overview');
+  const [showAllRecords, setShowAllRecords] = useState(false);
 
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-GB', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
   });
+
+  const displayedRecords = showAllRecords ? history : history.slice(0, 10);
 
   return (
     <div style={{
@@ -65,7 +83,7 @@ export default function App() {
               margin: '0 0 4px',
               letterSpacing: '-0.02em',
             }}>
-              {EMPLOYEE_NAME}
+              {id}
             </h1>
             <p style={{
               fontFamily: "'DM Mono', monospace",
@@ -73,7 +91,7 @@ export default function App() {
               color: '#4b5563',
               margin: '0',
             }}>
-              {EMPLOYEE_ID} · {EMPLOYEE_ROLE}
+              Employee
             </p>
           </div>
 
@@ -87,27 +105,42 @@ export default function App() {
               fontFamily: "'DM Mono', monospace",
               fontSize: '0.7rem',
               color: '#374151',
-              margin: 0,
+              margin: '0 0 8px',
             }}>
               {dateStr}
             </p>
-            <button
-              onClick={refresh}
-              style={{
-                marginTop: '8px',
-                background: 'none',
-                border: '1px solid #1f2937',
-                borderRadius: '6px',
-                color: '#4b5563',
-                fontFamily: "'DM Mono', monospace",
-                fontSize: '0.65rem',
-                padding: '4px 10px',
-                cursor: 'pointer',
-                letterSpacing: '0.05em',
-              }}
-            >
-              ↻ refresh
-            </button>
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={refresh}
+                style={{
+                  background: 'none',
+                  border: '1px solid #1f2937',
+                  borderRadius: '6px',
+                  color: '#4b5563',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: '0.65rem',
+                  padding: '4px 10px',
+                  cursor: 'pointer',
+                }}
+              >
+                ↻ refresh
+              </button>
+              <button
+                onClick={() => navigate('/')}
+                style={{
+                  background: 'none',
+                  border: '1px solid #1f2937',
+                  borderRadius: '6px',
+                  color: '#4b5563',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: '0.65rem',
+                  padding: '4px 10px',
+                  cursor: 'pointer',
+                }}
+              >
+                ← sign out
+              </button>
+            </div>
           </div>
         </header>
 
@@ -141,7 +174,7 @@ export default function App() {
 
         {!loading && !error && (
           <>
-            {/* Top row: live timer + today info */}
+            {/* Top row */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1.5fr 1fr',
@@ -153,7 +186,6 @@ export default function App() {
                 status={todayStatus?.status ?? 'NO_DATA'}
               />
 
-              {/* Today's record card */}
               <div style={{
                 background: '#0d1117',
                 border: '1px solid #1f2937',
@@ -171,7 +203,6 @@ export default function App() {
                 }}>
                   Today's Record
                 </p>
-
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <Row label="Status" value={
                     todayStatus
@@ -198,28 +229,23 @@ export default function App() {
               </div>
             </div>
 
-            {/* Stats row */}
             <div style={{ marginBottom: '16px' }}>
               <StatsRow history={history} />
             </div>
 
-            {/* Charts */}
             <div style={{ marginBottom: '16px' }}>
               <Charts monthData={monthData} history={history} />
             </div>
 
-            {/* Tabs */}
+            {/* Overview table */}
             <div style={{
               background: '#0d1117',
               border: '1px solid #1f2937',
               borderRadius: '16px',
               overflow: 'hidden',
             }}>
-              <div style={{
-                display: 'flex',
-                borderBottom: '1px solid #1f2937',
-              }}>
-                {(['overview', 'history'] as const).map(t => (
+              <div style={{ display: 'flex', borderBottom: '1px solid #1f2937' }}>
+                {(['overview'] as const).map(t => (
                   <button
                     key={t}
                     onClick={() => setTab(t)}
@@ -235,20 +261,44 @@ export default function App() {
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
-                      transition: 'color 0.2s',
                     }}
                   >
                     {t}
                   </button>
                 ))}
               </div>
-
               <div style={{ padding: '8px 0' }}>
                 {tab === 'overview' && (
-                  <AttendanceTable records={history.slice(0, 10)} />
-                )}
-                {tab === 'history' && (
-                  <AttendanceTable records={history} />
+                  <>
+                    <AttendanceTable records={displayedRecords} />
+                    {history.length > 10 && (
+                      <div style={{
+                        padding: '12px 24px',
+                        borderTop: '1px solid #111827',
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}>
+                        <button
+                          onClick={() => setShowAllRecords(prev => !prev)}
+                          style={{
+                            background: 'none',
+                            border: '1px solid #1f2937',
+                            borderRadius: '6px',
+                            color: '#4b5563',
+                            fontFamily: "'DM Mono', monospace",
+                            fontSize: '0.65rem',
+                            padding: '6px 16px',
+                            cursor: 'pointer',
+                            letterSpacing: '0.05em',
+                          }}
+                        >
+                          {showAllRecords
+                            ? `↑ show less`
+                            : `↓ show all ${history.length} records`}
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -257,14 +307,8 @@ export default function App() {
       </div>
 
       <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
-        }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         * { box-sizing: border-box; }
         body { margin: 0; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }

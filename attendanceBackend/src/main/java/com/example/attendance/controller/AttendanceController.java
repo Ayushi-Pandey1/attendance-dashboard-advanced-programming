@@ -1,19 +1,19 @@
 package com.example.attendance.controller;
 
 import com.example.attendance.dto.DailyAttendanceDto;
+import com.example.attendance.dto.TapRequestDto;
 import com.example.attendance.dto.TodayStatusDto;
 import com.example.attendance.entity.AttendanceEvent;
 import com.example.attendance.entity.DailyAttendanceEntity;
 import com.example.attendance.model.AttendanceStatus;
 import com.example.attendance.repository.AttendanceEventRepository;
 import com.example.attendance.repository.DailyAttendanceRepository;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,8 +33,22 @@ public class AttendanceController {
     }
 
     /**
+     * POST /api/attendance/tap
+     * Records an IN or OUT event for an employee.
+     */
+    @PostMapping("/tap")
+    public ResponseEntity<String> tap(@RequestBody TapRequestDto request) {
+        AttendanceEvent event = new AttendanceEvent();
+        event.setEmployeeId(request.getEmployeeId());
+        event.setEventType(request.getEventType().toUpperCase());
+        event.setEventTime(LocalDateTime.now());
+        event.setProcessed(false);
+        eventRepo.save(event);
+        return ResponseEntity.ok("Event recorded");
+    }
+
+    /**
      * GET /api/attendance/today/{employeeId}
-     * Returns today's status including lastInTime for live timer calculation.
      */
     @GetMapping("/today/{employeeId}")
     public TodayStatusDto getToday(@PathVariable String employeeId) {
@@ -54,7 +68,6 @@ public class AttendanceController {
         dto.setStatus(entity.getStatus() != null ? entity.getStatus().name() : "NO_DATA");
         dto.setDuration(entity.getFinalInOfficeDuration());
 
-        // If currently IN_OFFICE, find the last unmatched IN event to return lastInTime
         if (entity.getStatus() == AttendanceStatus.IN_OFFICE) {
             LocalDateTime startOfDay = today.atStartOfDay();
             LocalDateTime endOfDay = today.atTime(23, 59, 59);
@@ -82,7 +95,6 @@ public class AttendanceController {
 
     /**
      * GET /api/attendance/status/{employeeId}
-     * Alias for today — used by status badge component.
      */
     @GetMapping("/status/{employeeId}")
     public TodayStatusDto getStatus(@PathVariable String employeeId) {
@@ -91,7 +103,6 @@ public class AttendanceController {
 
     /**
      * GET /api/attendance/history/{employeeId}
-     * Returns all attendance records, newest first.
      */
     @GetMapping("/history/{employeeId}")
     public List<DailyAttendanceDto> getHistory(@PathVariable String employeeId) {
@@ -101,8 +112,7 @@ public class AttendanceController {
     }
 
     /**
-     * GET /api/attendance/month/{employeeId}?year=2024&month=6
-     * Returns attendance data for a given month.
+     * GET /api/attendance/month/{employeeId}?year=&month=
      */
     @GetMapping("/month/{employeeId}")
     public List<DailyAttendanceDto> getMonth(

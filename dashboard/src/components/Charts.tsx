@@ -10,20 +10,13 @@ interface Props {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  PRESENT:    '#4ade80',
-  PARTIAL:    '#fbbf24',
+  PRESENT: '#4ade80',
+  PARTIAL: '#fbbf24',
   INCOMPLETE: '#f87171',
-  INVALID:    '#a78bfa',
-  IN_OFFICE:  '#00ffb3',
-  NO_DATA:    '#374151',
+  INVALID: '#a78bfa',
+  IN_OFFICE: '#00ffb3',
+  NO_DATA: '#374151',
 };
-
-function parseDurationToMinutes(dur: string | null): number {
-  if (!dur || dur === 'ONGOING') return 0;
-  const h = parseInt(dur.match(/(\d+) hours?/)?.[1] ?? '0');
-  const m = parseInt(dur.match(/(\d+) minutes?/)?.[1] ?? '0');
-  return h * 60 + m;
-}
 
 function shortDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
@@ -48,11 +41,19 @@ const SECTION_TITLE: React.CSSProperties = {
 };
 
 export function Charts({ monthData, history }: Props) {
-  // Bar chart: daily duration this month
-  const barData = monthData.map(r => ({
-    date: shortDate(r.attendanceDate),
-    minutes: parseDurationToMinutes(r.finalInOfficeDuration),
-    status: r.status,
+
+  // Bar chart: count days attended per month across ALL history
+  const monthlyTotals: Record<string, number> = {};
+  history.forEach(r => {
+    if (r.status !== 'PRESENT' && r.status !== 'PARTIAL' && r.status !== 'IN_OFFICE') return;
+    const d = new Date(r.attendanceDate + 'T00:00:00');
+    const month = d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+    monthlyTotals[month] = (monthlyTotals[month] ?? 0) + 1;
+  });
+
+  const barData = Object.entries(monthlyTotals).map(([month, days]) => ({
+    month,
+    days,
   }));
 
   // Pie chart: status distribution from all history
@@ -67,9 +68,7 @@ export function Charts({ monthData, history }: Props) {
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
-    const mins = payload[0].value as number;
-    const h = Math.floor(mins / 60);
-    const m = mins % 60;
+    const days = payload[0].value as number;
     return (
       <div style={{
         background: '#111827',
@@ -81,7 +80,7 @@ export function Charts({ monthData, history }: Props) {
         color: '#d1d5db',
       }}>
         <div style={{ color: '#6b7280', marginBottom: 4 }}>{label}</div>
-        <div>{h}h {m}m</div>
+        <div>{days} day{days !== 1 ? 's' : ''} attended</div>
       </div>
     );
   };
@@ -91,14 +90,14 @@ export function Charts({ monthData, history }: Props) {
 
       {/* Bar Chart */}
       <div style={CARD_STYLE}>
-        <p style={SECTION_TITLE}>Daily Duration · This Month</p>
+        <p style={SECTION_TITLE}>Days Attended · All Months</p>
         {barData.length === 0 ? (
           <p style={{ color: '#374151', fontFamily: "'DM Mono', monospace", fontSize: '0.8rem' }}>No data this month.</p>
         ) : (
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={barData} barSize={8} margin={{ top: 0, right: 0, bottom: 0, left: -20 }}>
               <XAxis
-                dataKey="date"
+                dataKey="month"
                 tick={{ fill: '#4b5563', fontFamily: 'DM Mono, monospace', fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
@@ -109,15 +108,7 @@ export function Charts({ monthData, history }: Props) {
                 tickLine={false}
               />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: '#ffffff08' }} />
-              <Bar dataKey="minutes" radius={[4, 4, 0, 0]}>
-                {barData.map((entry, index) => (
-                  <Cell
-                    key={index}
-                    fill={STATUS_COLORS[entry.status] ?? '#374151'}
-                    opacity={0.85}
-                  />
-                ))}
-              </Bar>
+              <Bar dataKey="days" radius={[4, 4, 0, 0]} fill="#00ffb3" />
             </BarChart>
           </ResponsiveContainer>
         )}
