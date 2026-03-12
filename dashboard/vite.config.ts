@@ -12,4 +12,7 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    charset: 'utf8'
+  }
 })
