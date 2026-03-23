@@ -1,4 +1,4 @@
-package com.example.attendance.dto;
+package attendance.dto;
 
 public class TapRequestDto {
     private String employeeId;
