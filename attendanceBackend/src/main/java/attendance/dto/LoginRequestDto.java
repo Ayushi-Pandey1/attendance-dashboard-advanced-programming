@@ -1,4 +1,4 @@
-package com.example.attendance.dto;
+package attendance.dto;
 
 public class LoginRequestDto {
     private String staffNumber;
