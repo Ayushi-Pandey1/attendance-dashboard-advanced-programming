@@ -48,7 +48,7 @@ public class AttendanceController {
         AttendanceEvent event = new AttendanceEvent();
         event.setEmployeeId(request.getEmployeeId());
         event.setEventType(request.getEventType().toUpperCase());
-        event.setEventTime(LocalDateTime.now());
+        event.setEventTime(LocalDateTime.now().withNano(0));
         event.setProcessed(false);
 
         eventRepo.save(event);
