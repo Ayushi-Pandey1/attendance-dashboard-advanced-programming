@@ -45,7 +45,7 @@ export function Charts({ monthData, history }: Props) {
   // Bar chart: count days attended per month across ALL history
   const monthlyTotals: Record<string, number> = {};
   history.forEach(r => {
-    if (r.status !== 'PRESENT' && r.status !== 'PARTIAL' && r.status !== 'IN_OFFICE') return;
+    if (r.status !== 'PRESENT') return;
     const d = new Date(r.attendanceDate + 'T00:00:00');
     const month = d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
     monthlyTotals[month] = (monthlyTotals[month] ?? 0) + 1;
