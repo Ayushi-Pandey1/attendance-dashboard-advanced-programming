@@ -1,1 +1,7 @@
 node_modules/
+dashboard/node_modules/
+target/
+attendanceBackend/target/
+.DS_Store
+dist/
+dashboard/dist/
